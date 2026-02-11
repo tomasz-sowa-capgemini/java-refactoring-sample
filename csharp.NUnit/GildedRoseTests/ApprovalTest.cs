@@ -1,28 +1,38 @@
 using GildedRoseKata;
-
 using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-
 using VerifyNUnit;
-
 using NUnit.Framework;
 
-namespace GildedRoseTests;
-
-public class ApprovalTest
+namespace GildedRoseTests
 {
-    [Test]
-    public Task ThirtyDays()
+    /// <summary>
+    /// Contains approval tests for the GildedRose application.
+    /// </summary>
+    public class ApprovalTest
     {
-        var fakeOutput = new StringBuilder();
-        Console.SetOut(new StringWriter(fakeOutput));
-        Console.SetIn(new StringReader($"a{Environment.NewLine}"));
+        /// <summary>
+        /// Verifies the output of the GildedRose program after simulating 30 days.
+        /// </summary>
+        /// <returns>A verification task for the test output.</returns>
+        [Test]
+        public Task VerifyThirtyDaysOutputAsync()
+        {
+            var outputBuilder = new StringBuilder();
 
-        Program.Main(new string[] { "30" });
-        var output = fakeOutput.ToString();
+            using var outputWriter = new StringWriter(outputBuilder);
+            Console.SetOut(outputWriter);
 
-        return Verifier.Verify(output);
+            using var inputReader = new StringReader($"a{Environment.NewLine}");
+            Console.SetIn(inputReader);
+
+            Program.Main(new[] { "30" });
+
+            var programOutput = outputBuilder.ToString();
+
+            return Verifier.Verify(programOutput);
+        }
     }
 }
