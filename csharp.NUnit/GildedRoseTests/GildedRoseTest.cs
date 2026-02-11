@@ -2,16 +2,33 @@
 using GildedRoseKata;
 using NUnit.Framework;
 
-namespace GildedRoseTests;
-
-public class GildedRoseTest
+namespace GildedRoseTests
 {
-    [Test]
-    public void Foo()
+    /// <summary>
+    /// Unit tests for the <see cref="GildedRose"/> class.
+    /// </summary>
+    [TestFixture]
+    public class GildedRoseTests
     {
-        var items = new List<Item> { new Item { Name = "foo", SellIn = 0, Quality = 0 } };
-        var app = new GildedRose(items);
-        app.UpdateQuality();
-        Assert.That(items[0].Name, Is.EqualTo("fixme"));
+        /// <summary>
+        /// Verifies that the <see cref="GildedRose.UpdateQuality"/> method updates item properties as expected.
+        /// </summary>
+        [Test]
+        public void UpdateQuality_ShouldModifyItemPropertiesCorrectly()
+        {
+            // Arrange
+            var items = new List<Item>
+            {
+                new Item { Name = "foo", SellIn = 0, Quality = 0 }
+            };
+
+            var gildedRoseApp = new GildedRose(items);
+
+            // Act
+            gildedRoseApp.UpdateQuality();
+
+            // Assert
+            Assert.That(items[0].Name, Is.EqualTo("fixme"));
+        }
     }
 }

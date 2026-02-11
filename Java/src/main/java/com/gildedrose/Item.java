@@ -1,21 +1,63 @@
 package com.gildedrose;
 
+/**
+ * Represents an item with a name, sell-in value, and quality.
+ * <p>
+ * The {@code Item} class is immutable once created.
+ */
 public class Item {
 
-    public String name;
+    private final String name;
+    private final int sellIn;
+    private final int quality;
 
-    public int sellIn;
-
-    public int quality;
-
+    /**
+     * Constructs a new {@code Item}.
+     *
+     * @param name    the name of the item
+     * @param sellIn  the number of days to sell the item
+     * @param quality the quality of the item
+     */
     public Item(String name, int sellIn, int quality) {
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
     }
 
-   @Override
-   public String toString() {
-        return this.name + ", " + this.sellIn + ", " + this.quality;
+    /**
+     * Returns the name of the item.
+     *
+     * @return the item name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Returns the number of days remaining to sell the item.
+     *
+     * @return the sell-in value
+     */
+    public int getSellIn() {
+        return sellIn;
+    }
+
+    /**
+     * Returns the quality of the item.
+     *
+     * @return the item quality
+     */
+    public int getQuality() {
+        return quality;
+    }
+
+    /**
+     * Returns a string representation of the item.
+     *
+     * @return a formatted string containing item details
+     */
+    @Override
+    public String toString() {
+        return String.format("%s, %d, %d", name, sellIn, quality);
     }
 }

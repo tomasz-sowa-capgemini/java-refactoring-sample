@@ -2,16 +2,28 @@
 using System.Collections.Generic;
 using GildedRoseKata;
 
-namespace GildedRoseTests;
-
-public class GildedRoseTest
+namespace GildedRoseTests
 {
-    [Fact]
-    public void foo()
+    /// <summary>
+    /// Unit tests for the <see cref="GildedRose"/> class.
+    /// </summary>
+    public class GildedRoseTest
     {
-        IList<Item> Items = new List<Item> { new Item { Name = "foo", SellIn = 0, Quality = 0 } };
-        GildedRose app = new GildedRose(Items);
-        app.UpdateQuality();
-        Assert.Equal("fixme", Items[0].Name);
+        [Fact]
+        public void UpdateQuality_ShouldMaintainExpectedItemName()
+        {
+            // Arrange
+            IList<Item> items = new List<Item>
+            {
+                new Item { Name = "foo", SellIn = 0, Quality = 0 }
+            };
+            var gildedRose = new GildedRose(items);
+
+            // Act
+            gildedRose.UpdateQuality();
+
+            // Assert
+            Assert.Equal("fixme", items[0].Name);
+        }
     }
 }

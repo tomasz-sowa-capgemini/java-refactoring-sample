@@ -1,37 +1,98 @@
 package com.gildedrose;
 
+/**
+ * TexttestFixture serves as a simple test harness for the GildedRose application.
+ * It initializes a set of items and simulates their quality updates over a number of days.
+ */
 public class TexttestFixture {
+
+    private static final String HEADER_SEPARATOR = "-------- day ";
+    private static final String HEADER_SUFFIX = " --------";
+    private static final String ITEM_HEADER = "name, sellIn, quality";
+
     public static void main(String[] args) {
         System.out.println("OMGHAI!");
 
-        Item[] items = new Item[] {
-                new Item("+5 Dexterity Vest", 10, 20), //
-                new Item("Aged Brie", 2, 0), //
-                new Item("Elixir of the Mongoose", 5, 7), //
-                new Item("Sulfuras, Hand of Ragnaros", 0, 80), //
+        Item[] items = initializeItems();
+        GildedRose gildedRoseApp = new GildedRose(items);
+
+        int simulationDays = determineSimulationDays(args);
+
+        simulateDays(gildedRoseApp, items, simulationDays);
+    }
+
+    /**
+     * Initializes the list of items to be used in the simulation.
+     *
+     * @return an array of Item objects
+     */
+    private static Item[] initializeItems() {
+        return new Item[] {
+                new Item("+5 Dexterity Vest", 10, 20),
+                new Item("Aged Brie", 2, 0),
+                new Item("Elixir of the Mongoose", 5, 7),
+                new Item("Sulfuras, Hand of Ragnaros", 0, 80),
                 new Item("Sulfuras, Hand of Ragnaros", -1, 80),
                 new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
                 new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
                 new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
-                // this conjured item does not work properly yet
-                new Item("Conjured Mana Cake", 3, 6) };
+                // This conjured item does not work properly yet
+                new Item("Conjured Mana Cake", 3, 6)
+        };
+    }
 
-        GildedRose app = new GildedRose(items);
-
-        int days = 2;
+    /**
+     * Determines the number of days to simulate based on command-line arguments.
+     *
+     * @param args command-line arguments
+     * @return number of days to simulate
+     */
+    private static int determineSimulationDays(String[] args) {
+        final int defaultDays = 2;
         if (args.length > 0) {
-            days = Integer.parseInt(args[0]) + 1;
-        }
-
-        for (int i = 0; i < days; i++) {
-            System.out.println("-------- day " + i + " --------");
-            System.out.println("name, sellIn, quality");
-            for (Item item : items) {
-                System.out.println(item);
+            try {
+                return Integer.parseInt(args[0]) + 1;
+            } catch (NumberFormatException e) {
+                System.err.println("Invalid input for days. Using default value: " + defaultDays);
             }
-            System.out.println();
-            app.updateQuality();
+        }
+        return defaultDays;
+    }
+
+    /**
+     * Simulates the passage of days, printing item states and updating their quality.
+     *
+     * @param gildedRoseApp the GildedRose application instance
+     * @param items         the array of items to simulate
+     * @param days          number of days to simulate
+     */
+    private static void simulateDays(GildedRose gildedRoseApp, Item[] items, int days) {
+        for (int day = 0; day < days; day++) {
+            printDayHeader(day);
+            printItems(items);
+            gildedRoseApp.updateQuality();
         }
     }
 
+    /**
+     * Prints the header for the current simulation day.
+     *
+     * @param day the current day number
+     */
+    private static void printDayHeader(int day) {
+        System.out.println(HEADER_SEPARATOR + day + HEADER_SUFFIX);
+        System.out.println(ITEM_HEADER);
+    }
+
+    /**
+     * Prints the details of all items.
+     *
+     * @param items array of items to print
+     */
+    private static void printItems(Item[] items) {
+        for (Item item : items) {
+            System.out.println(item);
+        }
+        System.out.println();
+    }
 }

@@ -1,21 +1,80 @@
 package com.gildedrose;
 
+/**
+ * Represents an item with a name, sell-in value, and quality.
+ * Used in the Gilded Rose inventory system.
+ */
 public class Item {
 
-    public String name;
+    private final String name;
+    private int sellIn;
+    private int quality;
 
-    public int sellIn;
-
-    public int quality;
-
+    /**
+     * Constructs an Item with the specified name, sell-in value, and quality.
+     *
+     * @param name    the name of the item
+     * @param sellIn  the number of days to sell the item
+     * @param quality the quality of the item
+     */
     public Item(String name, int sellIn, int quality) {
         this.name = name;
         this.sellIn = sellIn;
         this.quality = quality;
     }
 
-   @Override
-   public String toString() {
-        return this.name + ", " + this.sellIn + ", " + this.quality;
+    /**
+     * Returns the name of the item.
+     *
+     * @return the item name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Returns the number of days to sell the item.
+     *
+     * @return the sell-in value
+     */
+    public int getSellIn() {
+        return sellIn;
+    }
+
+    /**
+     * Sets the number of days to sell the item.
+     *
+     * @param sellIn the new sell-in value
+     */
+    public void setSellIn(int sellIn) {
+        this.sellIn = sellIn;
+    }
+
+    /**
+     * Returns the quality of the item.
+     *
+     * @return the item quality
+     */
+    public int getQuality() {
+        return quality;
+    }
+
+    /**
+     * Sets the quality of the item.
+     *
+     * @param quality the new quality value
+     */
+    public void setQuality(int quality) {
+        this.quality = quality;
+    }
+
+    /**
+     * Returns a string representation of the item.
+     *
+     * @return a formatted string containing item details
+     */
+    @Override
+    public String toString() {
+        return String.format("%s, %d, %d", name, sellIn, quality);
     }
 }

@@ -4,14 +4,21 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Unit tests for the {@link GildedRose} class.
+ */
 class GildedRoseTest {
 
+    /**
+     * Verifies that the item name remains unchanged after updating quality.
+     */
     @Test
-    void foo() {
-        Item[] items = new Item[] { new Item("foo", 0, 0) };
-        GildedRose app = new GildedRose(items);
-        app.updateQuality();
-        assertEquals("fixme", app.items[0].name);
-    }
+    void shouldRetainItemNameAfterQualityUpdate() {
+        Item[] items = { new Item("foo", 0, 0) };
+        GildedRose gildedRose = new GildedRose(items);
 
+        gildedRose.updateQuality();
+
+        assertEquals("fixme", gildedRose.items[0].name);
+    }
 }
