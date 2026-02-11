@@ -5,10 +5,24 @@ It is designed to be used by TextTest and specified in the file 'texttests/confi
 It is more convenient for TextTest to use since Gradle needs
 several arguments in addition to the one the TextTest fixture needs.
 """
+
 import os
 import subprocess
 import sys
 
-args = " ".join(sys.argv[1:])
-TEXTTEST_HOME = os.environ.get("TEXTTEST_HOME", os.getcwd())
-subprocess.run(f"{TEXTTEST_HOME}/Java/gradlew -p {TEXTTEST_HOME}/Java -q text --args {args}", shell=True)
+
+def main() -> None:
+    """Execute the TexttestFixture using Gradle."""
+    args = " ".join(sys.argv[1:])
+    texttest_home = os.environ.get("TEXTTEST_HOME", os.getcwd())
+
+    gradle_command = (
+        f"{texttest_home}/Java/gradlew "
+        f"-p {texttest_home}/Java -q text --args {args}"
+    )
+
+    subprocess.run(gradle_command, shell=True, check=False)
+
+
+if __name__ == "__main__":
+    main()
