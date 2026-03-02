@@ -3,7 +3,7 @@
 ## Run the TextTest Fixture from Command-Line
 
 ```
-./gradlew -q text
+./mvnw compile exec:java -Dexec.mainClass="com.gildedrose.TexttestFixture"
 ```
 
 ### Specify Number of Days
@@ -11,10 +11,10 @@
 For e.g. 10 days:
 
 ```
-./gradlew -q text --args 10
+./mvnw compile exec:java -Dexec.mainClass="com.gildedrose.TexttestFixture" -Dexec.args="10"
 ```
 
-You should make sure the gradle commands shown above work when you execute them in a terminal before trying to use TextTest (see below).
+You should make sure the maven commands shown above work when you execute them in a terminal before trying to use TextTest (see below).
 
 
 ## Run the TextTest approval test that comes with this project
