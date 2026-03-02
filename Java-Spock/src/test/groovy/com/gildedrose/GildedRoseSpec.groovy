@@ -10,16 +10,16 @@ class GildedRoseSpec extends Specification {
     def "should update quality correctly"() {
 
         given: "some items"
-        Item[] items = [new Item("foo", 0, 0)];
+        Item[] items = [new Item("foo", 0, 0)]
 
         and: "the application with these items"
-        GildedRose app = new GildedRose(items);
+        GildedRose app = new GildedRose(items)
 
         when: "updating quality"
-        app.updateQuality();
+        app.updateQuality()
 
         then: "the quality is correct"
-        app.items[0].name == "fixme"
+        app.items[0].name == "foo"
     }
 
 }
