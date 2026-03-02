@@ -17,9 +17,6 @@ The purpose of this repository is to test Java and C# AI-agentic refactoring (e.
 
 ## What’s Included
 
-- C# implementations:
-	- `csharp.NUnit/`
-	- `csharp.xUnit/`
 - Java implementations:
 	- `Java/`
 	- `Java-Approvals/`
